@@ -1,0 +1,11 @@
+{
+  "name": "react-tdd-getstarted",
+  "version": "0.0.1",
+  "dependencies": {
+    "react": "latest"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "enzyme": "latest"
+  }
+}
