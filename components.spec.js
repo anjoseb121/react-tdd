@@ -52,7 +52,7 @@ describe('InputArea', () => {
 	});
 
 	it('should accept input', () => {
-		const wrapper = shallow(<InputArea/>);
+		const wrapper = mount(<InputArea/>);
 		const input = wrapper.find('input');
 		input.simulate('change', { target:  { value: 'Resin' }});
 		expect(wrapper.state('text')).to.equal('Resin');
