@@ -78,23 +78,36 @@ describe('InputArea', () => {
 		expect(addItemSpy.calledWith('Octoberfest')).to.equal(true);
 	});
 
+	it('should clear the input box when Add is clicked', () => {
+		const addItemSpy = spy();
+		const wrapper = shallow(<InputArea onSubmit={addItemSpy}/>)
+		wrapper.setState({text: 'Corona'})
+		const addButton = wrapper.find('button');
+
+		addButton.simulate('click');
+
+		expect(addItemSpy.calledOnce).to.equal(true);
+		expect(addItemSpy.calledWith('Corona')).to.equal(true);
+		expect(wrapper.state('text')).to.equal('');
+	})
+
 });
 
 describe('BeerList', () => {
 
 	it('should render zero items', () => {
-		const wrapper = shallow(<BeerList items={[]}/>)
+		const wrapper = shallow(<BeerList items={[]}/>);
 		expect(wrapper.find('li')).to.have.length(0)
 	});
 
 	it('should render undefined items', () => {
-		const wrapper = shallow(<BeerList items={undefined}/>)
+		const wrapper = shallow(<BeerList items={undefined}/>);
 		expect(wrapper.find('li')).to.have.length(0)
 	});
 
 	it('should render some items', () => {
-		const items = ['Sam Adams', 'Resin', 'Octoberfest']
-		const wrapper = shallow(<BeerList items={items}/>)
+		const items = ['Sam Adams', 'Resin', 'Octoberfest'];
+		const wrapper = shallow(<BeerList items={items}/>);
 		expect(wrapper.find('li')).to.have.length(3);
 	});
 
