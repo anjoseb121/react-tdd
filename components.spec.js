@@ -78,6 +78,18 @@ describe('InputArea', () => {
 		expect(addItemSpy.calledWith('Octoberfest')).to.equal(true);
 	});
 
+	it('should call onSubmit when Enter key is pressed', () => {
+		const addItemSpy = spy();
+		const wrapper = shallow(<InputArea onSubmit={addItemSpy}/>)
+		wrapper.setState({text: 'Aguila'});
+		const input = wrapper.find('input');
+		input.simulate('keyDown',  { key: 'Enter', keyCode: 13, which: 13 });
+
+		expect(addItemSpy.calledOnce).to.equal(true);
+		expect(addItemSpy.calledWith('Aguila')).to.equal(true);
+	
+	});
+
 	it('should clear the input box when Add is clicked', () => {
 		const addItemSpy = spy();
 		const wrapper = shallow(<InputArea onSubmit={addItemSpy}/>)
@@ -89,7 +101,20 @@ describe('InputArea', () => {
 		expect(addItemSpy.calledOnce).to.equal(true);
 		expect(addItemSpy.calledWith('Corona')).to.equal(true);
 		expect(wrapper.state('text')).to.equal('');
-	})
+	});
+
+	it('should clear the input box when Enter is pressed', () => {
+		const addItemSpy = spy();
+		const wrapper = shallow(<InputArea onSubmit={addItemSpy}/>)
+		wrapper.setState({text: 'Corona'})
+		const addButton = wrapper.find('button');
+
+		addButton.simulate('click');
+
+		expect(addItemSpy.calledOnce).to.equal(true);
+		expect(addItemSpy.calledWith('Corona')).to.equal(true);
+		expect(wrapper.state('text')).to.equal('');
+	});
 
 });
 

@@ -41,10 +41,19 @@ export class InputArea extends Component {
     };
     this.setText = this.setText.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   setText(event) {
     this.setState({text: event.target.value})
+  }
+
+  handleEnter(event) {
+    if (event.keyCode == 13 || event.which == 13 || event.key == 13) {
+      this.props.onSubmit(this.state.text)
+    } else {
+      console.log('is another key');
+    }
   }
 
   handleClick() {
@@ -55,7 +64,7 @@ export class InputArea extends Component {
   render() {
     return (
       <div>
-        <input value={this.state.text} onChange={this.setText} />
+        <input onKeyDown={this.handleEnter} value={this.state.text} onChange={this.setText} />
         <button onClick={this.handleClick}>Add</button>
       </div>
     )
