@@ -66,7 +66,23 @@ InputArea.PropTypes = {
 };
 
 export class BeerList extends Component {
+
+  constructor(props) {
+    super(props);
+
+  }
   render() {
-    return <ul />
+    return this.props.items ? (
+      <ul>
+        { 
+          this.props.items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))
+        }
+      </ul>
+    ) : null;
   }
 }
+BeerList.PropTypes = {
+  items: React.PropTypes.array.isRequired
+};
