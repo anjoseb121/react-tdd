@@ -107,9 +107,8 @@ describe('InputArea', () => {
 		const addItemSpy = spy();
 		const wrapper = shallow(<InputArea onSubmit={addItemSpy}/>)
 		wrapper.setState({text: 'Corona'})
-		const addButton = wrapper.find('button');
-
-		addButton.simulate('click');
+		const input = wrapper.find('input');
+		input.simulate('keyDown',  { key: 'Enter', keyCode: 13, which: 13 });
 
 		expect(addItemSpy.calledOnce).to.equal(true);
 		expect(addItemSpy.calledWith('Corona')).to.equal(true);

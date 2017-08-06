@@ -51,6 +51,7 @@ export class InputArea extends Component {
   handleEnter(event) {
     if (event.keyCode == 13 || event.which == 13 || event.key == 13) {
       this.props.onSubmit(this.state.text)
+      this.setState({text: ''})
     } else {
       console.log('is another key');
     }
